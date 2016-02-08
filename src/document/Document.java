@@ -100,39 +100,40 @@ public abstract class Document {
 			}
 		}
 
-		System.out.println(indexOfVowels);
+		//System.out.println(indexOfVowels);
 
 		for( int i=0; i<indexOfVowels.size()-1; ) {
 			if( indexOfVowels.get(i+1) - indexOfVowels.get(i) == 1 ) {
-				System.out.println("removing index at i: " + i);
+				//System.out.println("removing index at i: " + i);
 
 				indexOfVowels.remove(i);
 
-				System.out.println("indexOfVowels after removal: ");
-				System.out.println(indexOfVowels);
+				//System.out.println("indexOfVowels after removal: ");
+				//System.out.println(indexOfVowels);
 			}
 			else {
 				i++;
 			}
 		}
 
-		System.out.println("final indexOfVowels: ");
+		//System.out.println("final indexOfVowels: ");
 
 		countSyll = indexOfVowels.size();
 
-		System.out.println("countSyll: " + countSyll);
+		//System.out.println("countSyll: " + countSyll);
 
 		char lastChar = word.charAt( word.length()-1 );
 		//check if lastChar is a lone e/E
-		if( !isVowel( word.charAt( word.length()-2 ))
+		if( word.length() >=2
+				&& !isVowel( word.charAt( word.length()-2 ))
 				&& indexOfVowels.size() > 1
 				&& (lastChar == 'e' || lastChar == 'E') ) {
-			System.out.println("lastChar is a lone e/E");
+			//System.out.println("lastChar is a lone e/E");
 			countSyll--;
 		}
 
 
-		System.out.println(indexOfVowels);
+		//System.out.println(indexOfVowels);
 
 		//countSyll = indexOfVowels.size();
 	    return countSyll;

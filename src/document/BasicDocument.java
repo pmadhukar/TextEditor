@@ -70,6 +70,22 @@ public class BasicDocument extends Document
 	    //TODO: Implement this method.  See the Module 1 support videos
         // if you need help.
 
+		/*
+		 * approach 1:
+		 * I wrote a regular expression to calculate all the syllables
+		 * in the sentence
+		 *
+		 * later filter out lone 'e'/'E' and decrement the syllables
+		 *
+		 *
+		 *
+		 * approach 2:
+		 * Implemented the method countSyllables(String word)
+		 * in Document.java
+		 *
+		 */
+
+		//common part to both the approaches
 		int totCount = 0;
 		if( this.getText().isEmpty() ) {
 			//System.out.println("text is empty so returning 0.");
@@ -79,28 +95,27 @@ public class BasicDocument extends Document
 		String pattern = "[a-zA-Z]+";
 		List<String> words = this.getTokens( pattern );
 
+		/*
+		 * approach1:
 		int count  = 0;
 		pattern = "[aeiouyAEIOUY]+";
+
 		List<String> syllables = this.getTokens(pattern);
-
-		/*
-		System.out.println();
-		System.out.println("Syllables are: ");
-		System.out.println(syllables);
-		System.out.println("size of syllables: " + syllables.size());
-
-		System.out.println();
-		*/
 
 		count = syllables.size();
 
 		for(String word : words) {
 			char lastChar = word.charAt( word.length()-1 );
 
+			//if second last char is a vowel then it's not a lone e condition
+			//so continue
 			if( word.length() >= 2 && isVowel(word.charAt(word.length()-2)) ) {
 				continue;
 			}
 
+			//lone e
+			//if lastChar is e/E and there is at least one vowel before that
+			//then reduce count of syllables by 1
 			for( int i=0; i<word.length()-1; i++ ) {
 				if( isVowel(word.charAt(i)) && (lastChar == 'e' || lastChar == 'E') ) {
 					count--;
@@ -110,37 +125,18 @@ public class BasicDocument extends Document
 			}
 		}
 
-		/*
-		char lastChar = word.charAt(word.length()-1);
-
-		if( syllables.size() > 1 &&  ( lastChar == 'e' || lastChar == 'E') ) {
-			count--;
-		}
-		*/
 		totCount += count;
         return totCount;
+        */
 
-        /*
-		for(String word : words){
-			int count = 0;
-			for(int i=0; i<word.length()-1; i++) {
-				if( isVowel(word.charAt(i)) ) {
-					count++;
-				}
-			}
-			char lastChar = word.charAt(word.length()-1);
-			if( lastChar == 'e' || lastChar == 'E' ) {
-				if( count == 0 ){
-					count++;
-				}
-			}
-			else if( isVowel(lastChar) ) {
-				count++;
-			}
-
-			totCount += count;
+		//approach2:
+		for( String word : words ) {
+			totCount += countSyllables(word);
 		}
-		*/
+
+
+		return totCount;
+
 	}
 
 
@@ -150,7 +146,7 @@ public class BasicDocument extends Document
 	 * You are encouraged to add your own tests.  */
 	public static void main(String[] args)
 	{
-		/*
+
 		testCase(new BasicDocument("This is a test.  How many???  "
 		        + "Senteeeeeeeeeences are here... there should be 5!  Right?"),
 				16, 13, 5);
@@ -167,7 +163,7 @@ public class BasicDocument extends Document
 		testCase(new BasicDocument("Sentences?!"), 3, 1, 1);
 		testCase(new BasicDocument("Lorem ipsum dolor sit amet, qui ex choro quodsi moderatius, nam dolores explicari forensibus ad."),
 		         32, 15, 1);
-		*/
+
 
 		/*
 		System.out.println("Testing isVowel");
