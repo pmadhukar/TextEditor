@@ -66,12 +66,13 @@ public class EfficientDocument extends Document {
 			numSentences++;
 		}
 
-		display(tokens);
+		//display(tokens);
 		// TODO: Finish this method.  Remember the countSyllables method from
 		// Document.  That will come in handy here.
 	}
 
 	private void display( List<String> tokens ) {
+
 		System.out.println("Text is: ");
 		System.out.println(this.getText());
 
@@ -81,8 +82,13 @@ public class EfficientDocument extends Document {
 			System.out.println(token);
 		}
 
-		System.out.println("Num words: " + numWords);
+
+
+	}
+
+	public void display() {
 		System.out.println("Num syllables: " + numSyllables);
+		System.out.println("Num words: " + numWords);
 		System.out.println("Num sentences: " + numSentences);
 	}
 
@@ -96,7 +102,7 @@ public class EfficientDocument extends Document {
 	@Override
 	public int getNumWords() {
 		//TODO: write this method.  Hint: It's simple
-	    return 0;
+	    return numWords;
 	}
 
 	/**
@@ -110,7 +116,7 @@ public class EfficientDocument extends Document {
 	@Override
 	public int getNumSentences() {
         //TODO: write this method.  Hint: It's simple
-        return 0;
+        return numSentences;
 	}
 
 	/**
@@ -124,7 +130,7 @@ public class EfficientDocument extends Document {
 	@Override
 	public int getNumSyllables() {
         //TODO: write this method.  Hint: It's simple
-        return 0;
+        return numSyllables;
 	}
 
 	// Can be used for testing
@@ -136,6 +142,7 @@ public class EfficientDocument extends Document {
 	    testCase(new EfficientDocument("This is a test.  How many???  "
                 + "Senteeeeeeeeeences are here... there should be 5!  Right?"),
                 16, 13, 5);
+
         testCase(new EfficientDocument(""), 0, 0, 0);
         testCase(new EfficientDocument("sentence, with, lots, of, commas.!  "
                 + "(And some poaren)).  The output is: 7.5."), 15, 11, 4);
@@ -152,8 +159,12 @@ public class EfficientDocument extends Document {
 
 
 
-		String text = "sentence, with, lots, of, commas.!";
+	    /*
+		String text = "This is a test.  How many???  "
+                + "Senteeeeeeeeeences are here... there should be 5!  Right?";
 		EfficientDocument effDoc = new EfficientDocument(text);
+		effDoc.display();
+		*/
 
 
 	}
