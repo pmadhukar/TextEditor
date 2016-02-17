@@ -105,6 +105,10 @@ public class MyLinkedList<E> extends AbstractList<E> {
 			throw new IndexOutOfBoundsException();
 		}
 
+		if( element == null ) {
+			throw new NullPointerException();
+		}
+
 		LLNode<E> newNode = new LLNode(element);
 		LLNode<E> current = head;
 
