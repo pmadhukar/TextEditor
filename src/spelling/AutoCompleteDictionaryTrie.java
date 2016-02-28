@@ -129,6 +129,9 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
     	 TrieNode stem = root;
     	 //TrieNode child;
     	 List<String> predictions = new ArrayList<>();
+
+    	 prefix = prefix.toLowerCase();
+
     	 for(int i=0; i<prefix.length(); i++) {
     		 //char ch = prefix.charAt(i);
     		 stem = stem.getChild(prefix.charAt(i));
