@@ -7,8 +7,8 @@ Course name: "Data structures: Measuring and Optimizing Performance"
 Implemented:  
 1. How easy to read is the input text? : Calculating Flesch Index of the input text.  
 2. Markov chain text generator. (https://en.wikipedia.org/wiki/Markov_chain)  
+3. Spell Check and Auto Complete  
+4. Spelling suggestions  
 
 ToDo:  
-1. Spell Check and Auto Complete  
-2. Spelling suggestions  
-3. Word paths  
+1. Word paths  
