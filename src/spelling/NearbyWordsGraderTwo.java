@@ -25,6 +25,7 @@ public class NearbyWordsGraderTwo {
 
             feedback += "** Test 1: 2 suggestions... ";
             List<String> d1 = nw.suggestions("dag", 4);
+            System.out.println("d1.size(): " + d1.size());
             feedback += "" + d1.size() + " suggestions returned.\n";
 
             feedback += "** Test 2: Checking suggestion correctness... ";
@@ -43,7 +44,7 @@ public class NearbyWordsGraderTwo {
                 feedback += i + ", ";
             }
             feedback += "\n";
-            
+
         } catch (Exception e) {
             out.println(feedback + "Runtime error: " + e);
             return;

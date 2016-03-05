@@ -79,6 +79,18 @@ public class NearbyWords implements SpellingSuggest {
 	 */
 	public void insertions(String s, List<String> currentList, boolean wordsOnly ) {
 		// TODO: Implement this method
+		for(int index=0; index <= s.length(); index++) {
+			for(int charCode = (int)'a'; charCode <= (int)'z'; charCode++) {
+				StringBuilder sb = new StringBuilder(s);
+				sb.insert(index, (char)charCode);
+
+				if(!currentList.contains(sb.toString()) &&
+						(!wordsOnly || dict.isWord(sb.toString())) &&
+						!s.equals(sb.toString())) {
+					currentList.add(sb.toString());
+				}
+			}
+		}
 	}
 
 	/** Add to the currentList Strings that are one character deletion away
@@ -90,6 +102,17 @@ public class NearbyWords implements SpellingSuggest {
 	 */
 	public void deletions(String s, List<String> currentList, boolean wordsOnly ) {
 		// TODO: Implement this method
+		for(int index=0; index < s.length(); index++) {
+			StringBuilder sb = new StringBuilder(s);
+			sb.deleteCharAt(index);
+
+			if(!currentList.contains(sb.toString()) &&
+					(!wordsOnly || dict.isWord(sb.toString())) &&
+					!s.equals(sb.toString())) {
+				currentList.add(sb.toString());
+			}
+
+		}
 	}
 
 	/** Add to the currentList Strings that are one character deletion away
@@ -112,28 +135,78 @@ public class NearbyWords implements SpellingSuggest {
 		queue.add(word);
 		visited.add(word);
 
+		//System.out.println("Starting while loop.");
 		// TODO: Implement the remainder of this method, see assignment for algorithm
+		//int counter = 0;
+		while( !queue.isEmpty() && retList.size()<=numSuggestions && visited.size() <= THRESHOLD) {
+			//System.out.println("queue: " + queue);
+
+			String curr = queue.remove(0);
+			//System.out.println("queue size after removal: " + queue.size());
+			//System.out.println("visited: " + visited);
+
+			//System.out.println("curr: " + curr + " retList.size(): " + retList.size());
+
+			List<String> neighbors = distanceOne(curr, true);
+			//System.out.println("size of neighbors list: " + neighbors.size());
+
+			//counter = 0;
+			for(String neighbor : neighbors) {
+				//System.out.print(counter++ + ",");
+				//System.out.println("neighbor: " + neighbor);
+
+				if( !visited.contains(neighbor) ) {
+					//System.out.println("Adding " + neighbor + " to visited queue." );
+
+					visited.add(neighbor);
+
+					//System.out.println("Appending " + neighbor + " to queue.");
+					queue.add(queue.size(), neighbor);
+					//System.out.println("queue size after adding: " + queue.size());
+					//System.out.println("String at the end of queue: " + queue.get(queue.size()-1));
+					if(retList.size() >= numSuggestions) {
+						break;
+					}
+					if( dict.isWord(neighbor)) {
+						//System.out.println(neighbor + " is a word. Adding to the list of words to return.");
+						retList.add(neighbor);
+					}
+				}
+			}
+			//System.out.println();
+			//System.out.println("words list: " + retList);
+			//System.out.println();
+		}
 
 		return retList;
 
 	}
 
    public static void main(String[] args) {
-	   /* basic testing code to get started
-	   String word = "i";
+	   // basic testing code to get started
+	   String word = "dag";
 	   // Pass NearbyWords any Dictionary implementation you prefer
+
 	   Dictionary d = new DictionaryHashSet();
-	   DictionaryLoader.loadDictionary(d, "data/dict.txt");
+	   DictionaryLoader.loadDictionary(d, "test_cases/dict2.txt");
 	   NearbyWords w = new NearbyWords(d);
+
 	   List<String> l = w.distanceOne(word, true);
 	   System.out.println("One away word Strings for for \""+word+"\" are:");
 	   System.out.println(l+"\n");
 
-	   word = "tailo";
-	   List<String> suggest = w.suggestions(word, 10);
+	   l = w.distanceOne(word, false);
+	   System.out.println("boolean wordsOnly is false: ");
+	   System.out.println("One away word Strings for for \""+word+"\" are:");
+	   System.out.println(l+"\n");
+
+
+	   word = "dag";
+	   List<String> suggest = w.suggestions(word, 4);
 	   System.out.println("Spelling Suggestions for \""+word+"\" are:");
 	   System.out.println(suggest);
-	   */
+
+
    }
 
 }
