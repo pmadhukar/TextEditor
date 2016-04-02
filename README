@@ -9,6 +9,4 @@ Implemented:
 2. Markov chain text generator. (https://en.wikipedia.org/wiki/Markov_chain)  
 3. Spell Check and Auto Complete  
 4. Spelling suggestions  
-
-ToDo:  
-1. Word paths  
+5. Word paths  
