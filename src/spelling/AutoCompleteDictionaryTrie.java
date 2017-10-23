@@ -38,7 +38,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 		for(int i=0; i<word.length(); i++) {
 			char ch = word.charAt(i);
 			//System.out.println("char at " + i + ": " + ch);
-			child = current.getChild( ch );
+			child = current.getChild( ch );//null initially
 
 			if( child != null ) {
 				current = child;
